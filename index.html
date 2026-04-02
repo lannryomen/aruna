@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="id" class="h-full">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aruna Picture - Turning Moments Into Memorable Memories</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    
+      .font-display {font-family: 'Poppins', sans-serif;}
+      .font-body {font-family: 'Inter', sans-serif;}
+    
+      /* Smooth Scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+
+       /* Animasi masuknya item */
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      
+      @keyframes popUp {
+        0%, 100% {  transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);}
+        5% { transform: scale(1.15); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2); }
+        10% { transform: scale(1); }
+      }
+
+      .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+      .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+      .animate-scale-in { animation: scaleIn 0.6s ease-out forwards; }
+      .animate-slide-left { animation: slideInLeft 0.8s ease-out forwards; }
+      .animate-slide-right { animation: slideInRight 0.8s ease-out forwards; }
+      .animate-float { animation: float 3s ease-in-out infinite; }
+      .animate-pop-up { animation: popUp 5s ease-in-out infinite; }
+      
+      .delay-100 { animation-delay: 0.1s; }
+      .delay-200 { animation-delay: 0.2s; }
+      .delay-300 { animation-delay: 0.3s; }
+      .delay-400 { animation-delay: 0.4s; }
+      .delay-500 { animation-delay: 0.5s; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+
+      .hero-pattern {
+        background-image: url(https://raw.githubusercontent.com/lannryomen/aruna/main/bg.jpg);
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero-section {
+        display: flex;
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;    
+        min-height: 100vh;      
+        width: 100%;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-4 left-4 right-4 md:top-8 md:left-16 md:right-16 z-50 bg-black/20 backdrop-blur-md rounded-xl flex items-center justify-between px-6 py-3 border border-white/10">
+    <div class="font-display text-white text-lg font-bold tracking-tight">Aruna Picture</div>
+    
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#portofolio" class="font-body text-white text-sm font-medium hover:text-gray-300 transition-colors">Portofolio</a>
+      <a href="https://wa.me/+6287889407621" class="font-body text-white text-sm font-medium hover:text-gray-300 transition-colors">Hubungi Kami</a>
+    </div>
+
+    <button id="menu-toggle" class="md:hidden text-white p-2 focus:outline-none">
+      <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-drawer" class="fixed inset-0 z-[60] hidden">
+    <div id="drawer-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    
+    <div class="absolute right-0 top-0 h-full w-64 bg-white shadow-2xl p-8 transform translate-x-full transition-transform duration-300 ease-in-out" id="drawer-content">
+      <div class="flex justify-end mb-8">
+        <button id="close-drawer" class="text-black">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <div class="flex flex-col gap-6">
+        <a href="#portfolio" class="font-display text-xl font-semibold text-black hover:text-gray-600 transition-colors drawer-link">Portofolio</a>
+        <a href="https://wa.me/+6287889407621" class="font-display text-xl font-semibold text-black hover:text-gray-600 transition-colors drawer-link">Hubungi Kami</a>
+        <hr class="border-gray-100">
+      </div>
+    </div>
+  </div>
+    
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen w-full flex items-center justify-center hero-pattern overflow-x-hidden pt-24 pb-12">
+    
+    <div class="relative w-full max-w-6xl px-4 flex flex-col items-center">
+      
+      <div class="text-center z-10 animate-fade-in-up">
+        <p class="text-black/70 text-sm md:text-base font-medium mb-2 font-body">
+          Turning Moments Into Memorable Memories.
+        </p>
+        <h1 class="text-black text-5xl md:text-7xl font-bold leading-tight font-display mb-8">
+          Aruna <br class="hidden md:block"/> Picture
+        </h1>
+        <a href="https://wa.me/+6287889407621" class="animate-pop-up inline-block bg-black text-white px-10 py-4 rounded-xl font-bold shadow-xl">
+          Book Now
+        </a>
+      </div>
+      
+      <div class="mt-8 md:mt-0 md:absolute md:left-4 lg:left-20 md:top-1/8 md:-translate-y-1/2 md:-translate-x-12 lg:-translate-x-24 animate-fade-in-up">
+        <div class="animate-float">
+          <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/IMG_1234.jpg" 
+            class="w-48 h-64 md:w-56 md:h-72 rounded-2xl shadow-2xl object-cover -rotate-3 md:-rotate-6">
+        </div>
+      </div>
+
+      <div class="mt-8 md:mt-0 md:absolute md:right-4 lg:right-20 md:top-1/8 md:-translate-y-1/2 md:translate-x-12 lg:translate-x-24 animate-fade-in-up">
+        <div class="animate-float">
+          <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/IMG_6053.jpg" 
+            class="w-48 h-64 md:w-56 md:h-72 rounded-2xl shadow-2xl object-cover rotate-3 md:rotate-6">
+        </div>
+    </div>
+
+      <div class="grid grid-cols-2 md:flex gap-3 md:gap-6 mt-12 md:mt-32 w-full justify-center animated-fade-in-up">
+        <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/IMG_6852.webp" class="w-full md:w-64 aspect-[3/2] rounded-xl shadow-lg object-cover hover:scale-105 transition-transform">
+        <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/IMG-1235.webp" class="w-full md:w-64 aspect-[3/2] rounded-xl shadow-lg object-cover hover:scale-105 transition-transform">
+        <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/IMG_6079.webp" class="w-full md:w-64 aspect-[3/2] rounded-xl shadow-lg object-cover hover:scale-105 transition-transform">
+        <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/IMG_750.webp" class="w-full md:w-64 aspect-[3/2] rounded-xl shadow-lg object-cover hover:scale-105 transition-transform">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Portofolio -->
+  <section id="portofolio" class="relative min-h-screen w-full flex items-center justify-center hero-pattern overflow-x-hidden pt-24 pb-12">
+    <div class="max-w-7xl mx-auto px-6 animate-fade-in-up">
+     <div class="text-center mb-16">
+      <span class="text-[#54789E] font-semibold tracking-wider uppercase reveal">Portofolio</span>
+      <h2 class="font-display text-4xl lg:text-5xl font-bold text-[#43608A] mt-4 mb-6 reveal">Karya Kami</h2>
+      <div class="section-divider mx-auto"></div>
+      <p class="text-[#54789E]/70 mt-6 max-w-2xl mx-auto reveal">Beberapa karya yang telah dihasilkan oleh Aruna Picture dalam perjalanan kami mendokumentasikan setiap momen penting.</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        <!-- Fotografi -->
+        <div class="card-hover bg-white rounded-2xl overflow-hidden group reveal">
+        <div class="h-56 gradient-forest relative">
+        <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/1.jpg" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <a href="" class="bg-white text-[#5A789E] px-4 py-2 rounded-full font-semibold text-sm">Lihat Karya</a>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-[#43608A] mb-1">Fotografi</h4>
+          <p class="text-[#1A1A1A]/60 text-sm">Hasil foto dari beberapa acara yang telah kami dokumentasikan.</p>
+        </div>
+        </div>
+        <!-- Videografi -->
+        <div class="card-hover bg-white rounded-2xl overflow-hidden group reveal">
+        <div class="h-56 bg-gradient-to-br from-[#C4CDD1] to-[#43608A] relative">
+        <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/2.jpg" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <a href="" class="bg-white text-[#5A789E] px-4 py-2 rounded-full font-semibold text-sm">Tonton Video</a>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-[#43608A] mb-1">Videografi</h4>
+          <p class="text-[#1A1A1A]/60 text-sm">Berbagai video yang telah kami kerjakan mulai dari shooting hingga editing.</p>
+        </div>
+        </div>
+        <!-- Desain Grafis -->
+        <div class="card-hover bg-white rounded-2xl overflow-hidden group reveal">
+        <div class="h-56 background gradient-forest relative">
+          <img src="https://raw.githubusercontent.com/lannryomen/aruna/main/3.jpg" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <a href="" class="bg-white text-[#5A789E] px-4 py-2 rounded-full font-semibold text-sm">Lihat Karya</a>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-[#43608A] mb-1">Desain Grafis</h4>
+          <p class="text-[#1A1A1A]/60 text-sm">Karya desain grafis yang telah kami hasilkan untuk berbagai kebutuhan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeDrawer = document.getElementById('close-drawer');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const drawerContent = document.getElementById('drawer-content');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    const drawerLinks = document.querySelectorAll('.drawer-link');
+
+    function openMenu() {
+      mobileDrawer.classList.remove('hidden');
+      // Beri jeda sedikit agar animasi translate-x jalan
+      setTimeout(() => {
+        drawerContent.classList.remove('translate-x-full');
+      }, 10);
+    }
+
+    function closeMenu() {
+      drawerContent.classList.add('translate-x-full');
+      setTimeout(() => {
+        mobileDrawer.classList.add('hidden');
+      }, 300);
+    }
+
+    menuToggle.addEventListener('click', openMenu);
+    closeDrawer.addEventListener('click', closeMenu);
+    drawerOverlay.addEventListener('click', closeMenu);
+
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+    // Membuat observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // Jika elemen sudah masuk ke area layar
+        if (entry.isIntersecting) {
+          // Tambahkan class 'active' untuk memicu CSS
+          entry.target.classList.add('active'); 
+          
+          // Opsional: Hentikan observasi agar animasi tidak terulang saat scroll ke atas lagi
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1 // Elemen dianggap muncul jika minimal 10% sudah terlihat
+    });
+
+    // Memulai observasi untuk setiap elemen
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+</html>
